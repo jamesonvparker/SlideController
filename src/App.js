@@ -61,7 +61,7 @@ export default function App() {
         }}
       >
         <Router>
-          <div className="columns is-mobile is-flex-direction-column is-fullheight-100vh">
+          <div className="columns is-mobile is-flex-direction-column is-fullheight-100vh is-marginless">
             <header className="column is-narrow">
               <Navbar />
             </header>
