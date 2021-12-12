@@ -61,11 +61,11 @@ export default function App() {
         }}
       >
         <Router>
-          <div class="columns is-mobile is-flex-direction-column is-fullheight-100vh">
-            <header class="column is-narrow">
+          <div className="columns is-mobile is-flex-direction-column is-fullheight-100vh">
+            <header className="column is-narrow">
               <Navbar />
             </header>
-            <div class="column">
+            <div className="column">
               <Routes>
                 <Route path="/" element={showHome ? <Home /> : <Login />} />
                 <Route path="/about" element={<About />} />
@@ -76,7 +76,7 @@ export default function App() {
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </div>
-            <footer class="column is-narrow is-paddingless">
+            <footer className="column is-narrow is-paddingless">
               <Footer />
             </footer>
           </div>
