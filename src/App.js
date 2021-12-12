@@ -7,6 +7,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import Home from "./Pages/Home";
+import Listing from "./Pages/Listing";
 import About from "./Pages/About";
 import Profile from "./Pages/Profile";
 import ErrorPage from "./Pages/ErrorPage";
@@ -70,6 +71,7 @@ export default function App() {
             <div className="column is-paddingless">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/listing/:id" element={<Listing />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:username" element={<Profile />} />
