@@ -1,0 +1,26 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.slider-box {
+  height: 100px;
+  background: orange;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-box-text {
+  color: "#fff";
+  font-weight: bold;
+}
+
+.is-fullheight-100vh {
+  height: 100vh;
+}
+
+.footer {
+  background: grey;
+}
