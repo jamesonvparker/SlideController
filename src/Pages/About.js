@@ -6,9 +6,9 @@ function About() {
     LoginContext
   );
   return (
-    <section class="section">
-      <h1 class="title">Welcome to the About page, {username}</h1>
-      <h2 class="subtitle">
+    <section className="section">
+      <h1 className="title">Welcome to the About page, {username}</h1>
+      <h2 className="subtitle">
         A simple container to divide your page into <strong>sections</strong>,
         like the one you're currently reading.
       </h2>

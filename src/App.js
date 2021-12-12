@@ -65,7 +65,7 @@ export default function App() {
             <header className="column is-narrow">
               <Navbar />
             </header>
-            <div className="column">
+            <div className="column is-paddingless">
               <Routes>
                 <Route path="/" element={showHome ? <Home /> : <Login />} />
                 <Route path="/about" element={<About />} />

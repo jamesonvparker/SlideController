@@ -13,10 +13,10 @@ function SlideDetail() {
   console.log(data);
 
   return (
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <p class="title">Welcome to the Slide Detail page, {username}</p>
-        <p class="subtitle">Detials for the Slide you clicked on:</p>
+    <section className="hero is-primary">
+      <div className="hero-body">
+        <p className="title">Welcome to the Slide Detail page, {username}</p>
+        <p className="subtitle">Detials for the Slide you clicked on:</p>
         <p>Slide ID: {data.id}</p>
         <p>Slide Content: {data.sliderContent}</p>
         <p>Slide Background Color: {data.sliderBackground}</p>
