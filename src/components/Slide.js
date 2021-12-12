@@ -9,7 +9,7 @@ export default function Slide({ text, bgColor, textColor, id }) {
   console.log("id", id);
 
   return (
-    <Link to={"/slide/" + id}>
+    <Link to={"/slide/" + id} key={id}>
       <div
         className="box slider-box is-flex m-3"
         style={{ backgroundColor: bgColor }}

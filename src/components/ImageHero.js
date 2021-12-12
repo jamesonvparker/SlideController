@@ -2,10 +2,10 @@ import React from "react";
 
 function ImageHero() {
   return (
-    <section class="hero is-medium is-link landing-image">
-      <div class="hero-body">
-        <p class="title">Medium hero</p>
-        <p class="subtitle">Medium subtitle</p>
+    <section className="hero is-medium is-link landing-image">
+      <div className="hero-body">
+        <p className="title">Medium hero</p>
+        <p className="subtitle">Medium subtitle</p>
       </div>
     </section>
   );
