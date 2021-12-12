@@ -20,7 +20,9 @@ import Create from "./Pages/Create";
 import SlideDetail from "./Pages/SlideDetail";
 
 export default function App() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(
+    localStorage.getItem("name") || void 0
+  );
   const [showProfile, setShowProfile] = useState(false);
   const [showHome, setShowHome] = useState(false);
 
@@ -67,7 +69,7 @@ export default function App() {
             </header>
             <div className="column is-paddingless">
               <Routes>
-                <Route path="/" element={showHome ? <Home /> : <Login />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:username" element={<Profile />} />

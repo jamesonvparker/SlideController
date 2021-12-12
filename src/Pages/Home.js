@@ -9,6 +9,7 @@ function Home() {
     LoginContext
   );
   const { slides } = useContext(SlideContext);
+
   return (
     <section className="section is-paddingless">
       <h1 className="title">Hi {username}</h1>
@@ -17,8 +18,8 @@ function Home() {
       <SliderCarousel items={slides} />
 
       <h1 className="title ">Deal of the day</h1>
-      <SliderCarousel items={slides} />
-      <SliderCarousel items={slides} />
+      {/* <SliderCarousel items={slides} />
+      <SliderCarousel items={slides} /> */}
     </section>
   );
 }

@@ -19,6 +19,10 @@ function Profile() {
         A simple container to divide your page into <strong>sections</strong>,
         like the one you're currently reading.
       </h2>
+      {localStorage.getItem("name")}
+      {localStorage.getItem("email")}
+
+      <img src={localStorage.getItem("profilePic")} />
       <button
         onClick={() => {
           navigate("/about");

@@ -2,8 +2,11 @@ import "../styles.css";
 import { useState, useEffect, useRef, useContext } from "react";
 import SliderCarousel from "../components/SliderCarousel";
 import { SlideContext } from "../Contexts/SlideContext";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Create() {
+  const slidesCollectionRef = collection(db, "slides");
   // const [sliderBoxText, setSliderBoxText] = useState("");
   // const [sliderBoxTextColor, setSliderBoxTextColor] = useState("#000000");
   // const [sliderBg, setSliderBg] = useState("#ffffff");
@@ -59,23 +62,21 @@ export default function Create() {
   useEffect(() => {
     console.log(slides);
   }, [slides]);
-  const handleSave = () => {
-    let newSlide = [
-      {
-        id: sliderBoxText.split(" ").join(""),
-        sliderContent: sliderBoxText,
-        sliderBackground: sliderBg,
-        sliderTextColor: sliderBoxTextColor
-      }
-    ];
 
-    setSlides([...slides, ...newSlide]);
+  const createSlide = async () => {
+    let newSlide = {
+      text: sliderBoxText,
+      bgColor: sliderBg,
+      textColor: sliderBoxTextColor
+    };
+
+    await addDoc(slidesCollectionRef, newSlide);
   };
 
   return (
     <div className="App">
       <section className="section">
-        <div className="container">
+        <div className="">
           <h1 className="title">Slide Creator</h1>
           <p className="subtitle">
             Concept for buiding and saving slider ads <strong>V1</strong>!
@@ -120,17 +121,14 @@ export default function Create() {
               </div>
             </div>
           </div>
-          <button className="button is-success is-rounded" onClick={handleSave}>
-            Save
+          <button
+            className="button is-success is-rounded"
+            onClick={createSlide}
+          >
+            Create Slide
           </button>
         </div>
-
-        <div className="columns is-mobile ">
-          <div className="column has-text-left is-offset-2"></div>
-          <div className="column has-text-left is-offset-4 is-4">
-            <SliderCarousel items={slides} />
-          </div>
-        </div>
+        <SliderCarousel items={slides} />
       </section>
     </div>
   );
