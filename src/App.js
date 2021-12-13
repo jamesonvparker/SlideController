@@ -13,12 +13,14 @@ import Profile from "./Pages/Profile";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LoginContext } from "./Contexts/LoginContext";
 import { SlideContext } from "./Contexts/SlideContext";
 import Footer from "./components/Footer";
 import Create from "./Pages/Create";
 import SlideDetail from "./Pages/SlideDetail";
+import { db } from "./firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function App() {
   const [username, setUsername] = useState(
@@ -35,6 +37,18 @@ export default function App() {
   const textColorPicker = useRef();
   const backgroundColorPicker = useRef();
   const [slides, setSlides] = useState([]);
+
+  // const [slides, setSlides] = useState([]);
+  const slidesCollectionRef = collection(db, "slides");
+
+  useEffect(() => {
+    const getSlides = async () => {
+      const data = await getDocs(slidesCollectionRef);
+      setSlides(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getSlides();
+  }, []);
 
   return (
     <LoginContext.Provider
