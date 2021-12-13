@@ -15,9 +15,12 @@ const PromoScroller = () => {
       infinite={false}
       responsive={true}
     >
-      <PromoSlide />
-      <PromoSlide />
-      <PromoSlide />
+      <PromoSlide
+        title={"Visit JP's"}
+        subtitle={"We have limited time offers"}
+        ctaText={"Visit Store"}
+        ctaUrl={"/listing/2QFCfcO2q8avjGjjx4rh"}
+      />
       <PromoSlide />
       <PromoSlide />
       <PromoSlide />

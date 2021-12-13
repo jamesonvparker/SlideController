@@ -13,9 +13,10 @@ import Profile from "./Pages/Profile";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { LoginContext } from "./Contexts/LoginContext";
 import { SlideContext } from "./Contexts/SlideContext";
+import { ListingContext } from "./Contexts/ListingContext";
 import Footer from "./components/Footer";
 import Create from "./Pages/Create";
 import SlideDetail from "./Pages/SlideDetail";
@@ -36,10 +37,11 @@ export default function App() {
   const sliderBox = useRef();
   const textColorPicker = useRef();
   const backgroundColorPicker = useRef();
-  const [slides, setSlides] = useState([]);
 
-  // const [slides, setSlides] = useState([]);
+  const [slides, setSlides] = useState([]);
+  const [listings, setListings] = useState([]);
   const slidesCollectionRef = collection(db, "slides");
+  const listingsCollectionRef = collection(db, "listings");
 
   useEffect(() => {
     const getSlides = async () => {
@@ -49,6 +51,19 @@ export default function App() {
 
     getSlides();
   }, []);
+
+  useEffect(() => {
+    const getListings = async () => {
+      const data = await getDocs(listingsCollectionRef);
+      setListings(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getListings();
+  }, []);
+
+  useEffect(() => {
+    console.log("listings updated to", listings);
+  }, [listings]);
 
   return (
     <LoginContext.Provider
@@ -77,28 +92,32 @@ export default function App() {
           setSlides
         }}
       >
-        <Router>
-          <div className="columns is-mobile is-flex-direction-column is-fullheight-100vh is-marginless">
-            <header className="column is-narrow">
-              <Navbar />
-            </header>
-            <div className="column is-paddingless">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/listing/:id" element={<Listing />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/profile/:username" element={<Profile />} />
-                <Route path="/create" element={<Create />} />
-                <Route path="/slide/:id" element={<SlideDetail />} />
-                <Route path="*" element={<ErrorPage />} />
-              </Routes>
+        <ListingContext.Provider
+          value={{ listings, setListings: (listings) => setListings(listings) }}
+        >
+          <Router>
+            <div className="columns is-mobile is-flex-direction-column is-fullheight-100vh is-marginless">
+              <header className="column is-narrow">
+                <Navbar />
+              </header>
+              <div className="column is-paddingless">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/listing/:id" element={<Listing />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/profile/:username" element={<Profile />} />
+                  <Route path="/create" element={<Create />} />
+                  <Route path="/slide/:id" element={<SlideDetail />} />
+                  <Route path="*" element={<ErrorPage />} />
+                </Routes>
+              </div>
+              <footer className="column is-narrow is-paddingless">
+                <Footer />
+              </footer>
             </div>
-            <footer className="column is-narrow is-paddingless">
-              <Footer />
-            </footer>
-          </div>
-        </Router>
+          </Router>
+        </ListingContext.Provider>
       </SlideContext.Provider>
     </LoginContext.Provider>
   );

@@ -14,7 +14,7 @@ const PillScroller = () => {
       rightArrow={<RightArrow />}
       responsive={true}
     >
-      <CategoryPill />
+      <CategoryPill value={"Groceries"} />
       <CategoryPill />
       <CategoryPill />
       <CategoryPill />

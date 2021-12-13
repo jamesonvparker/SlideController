@@ -1,15 +1,9 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../Contexts/LoginContext";
-import SliderCarousel from "../components/SliderCarousel";
-import { SlideContext } from "../Contexts/SlideContext";
+import { ListingContext } from "../Contexts/ListingContext";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import ImageHero from "../components/ImageHero";
-import Card from "../components/Card";
-import { Carousel, Arrow } from "@trendyol-js/react-carousel";
-import CategoryPill from "../components/CategoryPill";
-import LeftArrow from "../components/LeftArrow";
-import RightArrow from "../components/RightArrow";
-import PromoSlide from "../components/PromoSlide";
 import ListingScroller from "../components/scrollers/ListingScroller";
 import PromoScroller from "../components/scrollers/PromoScroller";
 import PillScroller from "../components/scrollers/PillScroller";
@@ -18,26 +12,46 @@ function Home() {
   const { showProfile, setUsername, setShowProfile, username } = useContext(
     LoginContext
   );
-  const { slides } = useContext(SlideContext);
+  const { listings, setListings } = useContext(ListingContext);
+
+  // const [listings, setListings] = useState([]);
+
+  // const listingsCollectionRef = collection(db, "listings");
+
+  // useEffect(() => {
+  //   const getListings = async () => {
+  //     const data = await getDocs(listingsCollectionRef);
+  //     setListings(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   };
+
+  //   getListings();
+  // }, []);
+
+  useEffect(() => {
+    setListings(listings);
+    console.log("listings updated to", listings);
+  }, []);
 
   return (
     <section className="section is-paddingless">
       <h1 className="title">Hi {username}</h1>
       <h2 className="subtitle">Select an offer to claim</h2>
-      <div className="">
-        <PillScroller />
+      <div>
+        {/* <PillScroller /> */}
         <ImageHero
           imgSrc={"placeholder"}
-          title={"Title"}
-          subtitle={"Subtitle"}
+          title={"Home Page"}
+          subtitle={"Directory"}
+          fontColor={"#ffffff"}
         />
         {/* <SliderCarousel items={slides} /> */}
 
         <PromoScroller />
-        <ListingScroller />
-        <ListingScroller />
-        <ListingScroller />
-        <ListingScroller />
+        {/* Add Items with a general filter to the first listing. So, no filter for this first one */}
+        <ListingScroller listings={listings} label={"Voted Hottest Fashion"} />
+        <ListingScroller listings={listings} label={"Automotive"} />
+        <ListingScroller listings={listings} label={"Health"} />
+        <ListingScroller listings={listings} label={"Creative"} />
       </div>
     </section>
   );

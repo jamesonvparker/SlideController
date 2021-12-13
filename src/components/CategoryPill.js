@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 const CategoryPill = () => {
   return (
-    <Link to="/" class="tag is-link is-medium is-rounded m-1">
-      <img src="" />
+    <Link to="/" className="tag is-link is-medium is-rounded m-1">
       <span>Convenience</span>
     </Link>
   );

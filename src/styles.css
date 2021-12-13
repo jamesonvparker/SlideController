@@ -84,3 +84,15 @@
   background-color: lightblue;
   margin: 1rem;
 }
+
+.card-image {
+  /* border: 3px solid blue; */
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cardimage {
+  background: green;
+  height: 100%;
+  width: 100%;
+  border: 2px solid red;
+}
