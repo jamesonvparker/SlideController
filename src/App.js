@@ -55,13 +55,17 @@ export default function App() {
   useEffect(() => {
     const getListings = async () => {
       const data = await getDocs(listingsCollectionRef);
-      setListings(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      let n = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      // let m = {...n}
+      // setListings(n);
+      return n;
     };
 
-    getListings();
+    getListings().then((res) => setListings(res));
   }, []);
 
   useEffect(() => {
+    console.log(typeof listings);
     console.log("listings updated to", listings);
   }, [listings]);
 

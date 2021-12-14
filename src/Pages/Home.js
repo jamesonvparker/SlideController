@@ -48,8 +48,12 @@ function Home() {
 
         <PromoScroller />
         {/* Add Items with a general filter to the first listing. So, no filter for this first one */}
-        <ListingScroller listings={listings} label={"Voted Hottest Fashion"} />
-        <ListingScroller listings={listings} label={"Automotive"} />
+        <ListingScroller
+          listings={listings}
+          label={"All Listings"}
+          filter={false}
+        />
+        {/* <ListingScroller listings={listings} label={"Automotive"} /> */}
         <ListingScroller listings={listings} label={"Health"} />
         <ListingScroller listings={listings} label={"Creative"} />
       </div>

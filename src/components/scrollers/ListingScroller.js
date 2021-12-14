@@ -5,9 +5,13 @@ import RightArrow from "../../components/RightArrow";
 import { ListingContext } from "../../Contexts/ListingContext";
 import Card from "../../components/Card";
 
-const ListingScroller = ({ label }) => {
+const ListingScroller = ({ label, filter = true }) => {
   const { listings } = useContext(ListingContext);
   // const [data, setData] = useState(listings);
+
+  const items = filter
+    ? listings.filter((listing) => listing.category === label)
+    : listings;
 
   return (
     <div>
@@ -21,7 +25,7 @@ const ListingScroller = ({ label }) => {
         rightArrow={<RightArrow />}
         responsive={true}
       >
-        {listings.map((item) => {
+        {items.map((item) => {
           console.log("item rendered", item);
           return <Card key={item.id} listing={item} />;
         })}
